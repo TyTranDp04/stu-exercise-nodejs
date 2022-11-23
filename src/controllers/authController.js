@@ -91,8 +91,6 @@ export const authController = {
       }
       if (user && validPassword) {
         const accessToken = authController.generateAccessToken(user);
-        // const refreshToken = authController.generateRefreshToken(user);
-        // refreshTokens.push(refreshToken);
         res.cookie("accessToken", accessToken, {
           httpOnly: true,
           secure: false,
