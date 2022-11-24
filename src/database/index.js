@@ -1,0 +1,1 @@
+export {DpAlumniDatabase} from './dpalumni.js';
