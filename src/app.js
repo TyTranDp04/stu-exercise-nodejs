@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import router from './routes/index.js';
 
+
 dotenv.config();
 const port = process.env.PORT || 5035;
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(cors());
+
 
 app.get('/', (req, res) => {
   res.status(200).json({
