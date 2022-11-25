@@ -52,8 +52,8 @@ export const authController = {
   loginUser: async (req, res) => {
     try {
       const user = await UserSchema.findOne({ username: req.body.username });
-     
-      if (user=="") {
+
+      if (user == "") {
         return res.status(402).json({
           statusCode: "402",
           message: "UserName is empty. UserName required",
@@ -73,7 +73,7 @@ export const authController = {
         req.body.password,
         user.password
       );
-    if (validPassword=="") {
+      if (validPassword == "") {
         return res.status(402).json({
           statusCode: "402",
           message: "Password is empty. Password required",
@@ -119,9 +119,9 @@ export const authController = {
 
 
   //log out
-  userLogout : async(req , res)=>{
+  userLogout: async (req, res) => {
     res.clearCookie("accessToken");
-     return res.status(200).json("logOut!")
+    return res.status(200).json("logOut!")
   }
 };
 

@@ -1,10 +1,10 @@
-import {OurmainDatabase} from '../controllers/dbOurmain.js';
+import { OurmainDatabase } from '../controllers/dbOurmain.js';
 
 export const OurmainService = {
 
   get() {
     return new Promise((resolve, reject) => {
-        OurmainDatabase.get()
+      OurmainDatabase.get()
         .then((response) => {
           resolve({
             statusCode: 200,
@@ -22,7 +22,7 @@ export const OurmainService = {
   create(body) {
     let newPostObj = body;
     return new Promise((resolve, reject) => {
-        OurmainDatabase.create(newPostObj)
+      OurmainDatabase.create(newPostObj)
         .then((response) => {
           resolve({
             statusCode: 200,
