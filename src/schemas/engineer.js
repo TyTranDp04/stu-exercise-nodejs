@@ -7,8 +7,6 @@ const DropSchemaEngineer = new mongoose.Schema({
   Description: {
     type: String,
     require: true,
-
-
   },
   Images: {
     type: String,

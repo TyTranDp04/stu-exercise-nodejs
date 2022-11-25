@@ -1,4 +1,4 @@
-import { AlumniDatabase } from '../controllers/dbAlumni.js';
+import { AlumniDatabase } from '../database/dbAlumni.js';
 
 export const AlumniService = {
 

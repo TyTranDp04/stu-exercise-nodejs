@@ -13,16 +13,34 @@ export const EngineerController = {
       })
       .catch(next)
   },
-
-  update(request, response) {
-    const id = request.params;
-    const updateObj = request.body;
-    EngineerService.update({ _id: id }, { $set: updateObj })
-      .then((data) => {
-        Helper.responseJsonHandler(data, null, response)
-      }).catch((error) => {
-        Helper.responseJsonHandler(null, error, response)
+  showItem(req, res, next) {
+    EngineerSchema.findByIdAndUpdate({ _id: req.params.id })
+      .then(course => {
+        res.json(course)
       })
+      .catch(next)
+  },
+  update(req, res, next) {
+    const { file, body } = req
+    console.log(body, file)
+    if (file) {
+      that.uploadFileDriver({ shared: true }, file)
+        .then(result => {
+          const formData = {
+            ...body,
+            img: result.data.webContentLink
+          }
+          EngineerSchema.updateOne({ _id: req.params.id }, formData)
+            .then(() => res.redirect('/'))
+            .catch(err => {
+            });
+        })
+    } else {
+      EngineerSchema.updateOne({ _id: req.params.id }, body)
+        .then(() => res.redirect('/'))
+        .catch(err => {
+        });
+    }
   },
 
   delete(request, response) {

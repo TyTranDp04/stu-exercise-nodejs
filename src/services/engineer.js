@@ -1,4 +1,4 @@
-import { EngineerDatabase } from '../controllers/dbengineer.js';
+import { EngineerDatabase } from '../database/dbengineer.js';
 
 export const EngineerService = {
 
