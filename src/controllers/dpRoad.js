@@ -5,14 +5,6 @@ import { DpRoadService } from '../services/dpRoad.js';
 
 export const DpRoadController = {
 
-  // get(request, response) {
-  //   DpRoadService.get()
-  //     .then((data) => {
-  //       Helper.responseJsonHandler(data, null, response)
-  //     }).catch((error) => {
-  //       Helper.responseJsonHandler(null, error, response)
-  //     })
-  // },
   get(req, res, next) {
     DpRoadSchema.find({})
       .then(course => {
@@ -32,34 +24,6 @@ export const DpRoadController = {
         Helper.responseJsonHandler(null, error, response)
       })
   },
-
-  // create(req, res) {
-  //   const { body, file } = req
-  //   console.log(body, file)
-  //   if(file){
-  //     that.uploadFileDriver({ shared: true }, file)
-  //     .then(result => {
-  //       const formData = {
-  //         ...body,
-  //         img: result.data.webContentLink
-  //       }
-  //       const courses = new DpRoadSchema(formData)
-  //       courses.save()
-  //         .then(() => res.redirect('/'))
-  //         .catch(err => {
-  //         });
-  //     })
-  //   }else{
-  //     const courses = new DpRoadSchema(body)
-  //     // console.log(body);
-  //     console.log(coursess)
-  //     courses.save()
-  //       .then(() => res.redirect('/'))
-  //       .catch(err => {
-  //       });
-  //   }
-    
-  // },
 
   update(request, response) {
     const id = request.params;
