@@ -4,8 +4,7 @@ import { AlumniSchema } from '../schemas/dpAlumni.js';
 import { AlumniService } from '../services/dpAlumni.js';
 
 export const AlumniController = {
-
-  get(req, res, next) {
+  show(req, res, next) {
     AlumniSchema.find({})
       .then(course => {
         res.json(course)
@@ -41,35 +40,15 @@ export const AlumniController = {
         });
     }
   },
-  delete(request, response) {
-    const id = request.params;
-    AlumniSchema.softDelete({ _id: id })
-      .then(() => response.status(200).json({
-        statusCode: 200,
-        message: "Delete data successfully",
-        data: null,
-        success: true
-      }))
-      .catch(() => response.status(404).json({
-        success: false,
-        message: `Can't find id: ${id._id}.`
-      }));
-  },
 
-  restore(request, response) {
-    const id = request.params;
-    AlumniSchema.restore({ _id: id })
-      .then(() => response.status(200).json({
-        statusCode: 200,
-        message: "Restore data successfully",
-        success: true
-      }))
-      .catch(() => response.status(404).json({
-        success: false,
-        message: `Can't find id: ${id._id}.`
-      }));
+  delete(req, res, next) {
+    AlumniSchema.deleteOne({ _id: req.params.id })
+      .then(course => {
+        res.json(course)
+      })
+      .catch(next)
   },
-  create(req, res) {
+  upload(req, res, next) {
     const { body, file } = req
     console.log(body, file)
     if (file) {
@@ -95,5 +74,4 @@ export const AlumniController = {
     }
 
   }
-
 }

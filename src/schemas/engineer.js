@@ -4,15 +4,15 @@ import { softDeletePlugin } from 'soft-delete-plugin-mongoose';
 mongoose.Promise = global.Promise;
 
 const DropSchemaEngineer = new mongoose.Schema({
-  Description: {
+  description: {
     type: String,
     require: true,
   },
-  Images: {
+  img: {
     type: String,
     require: true,
   },
-  Name: {
+  name: {
     type: String,
     require: true,
   },
