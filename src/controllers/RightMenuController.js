@@ -9,15 +9,38 @@ export const RightMenuController = {
       })
       .catch(next)
   },
-  update(req, res, next) {
-    RightMenuSchema.find({})
+  showItem(req, res, next) {
+    RightMenuSchema.findByIdAndUpdate({ _id: req.params.id })
       .then(course => {
         res.json(course)
       })
       .catch(next)
   },
+  update(req, res, next) {
+    const { file, body } = req
+    console.log(body, file)
+    if (file) {
+      that.uploadFileDriver({ shared: true }, file)
+        .then(result => {
+          const formData = {
+            ...body,
+            img: result.data.webContentLink
+          }
+          RightMenuSchema.updateOne({ _id: req.params.id }, formData)
+            .then(() => res.redirect('/'))
+            .catch(err => {
+            });
+        })
+    } else {
+      RightMenuSchema.updateOne({ _id: req.params.id }, body)
+        .then(() => res.redirect('/'))
+        .catch(err => {
+        });
+    }
+  },
+
   delete(req, res, next) {
-    RightMenuSchema.find({})
+    RightMenuSchema.deleteOne({ _id: req.params.id })
       .then(course => {
         res.json(course)
       })
