@@ -5,6 +5,7 @@ import {authController} from "../controllers/authController.js";
 import { middlewareController } from "../controllers/middlewareController.js";
 import {upload}  from '../middlewares/MulterMiddleWare.js'
 import {RightMenuController} from '../controllers/RightMenuController.js'
+import { DpRoadController } from "../controllers/dpRoad.js";
 
 const router = express.Router();
 router.get("/api/dpalumni", DpAlumniController.get);
@@ -25,5 +26,11 @@ router.get('/rightmenu', RightMenuController.show);
 router.delete('/rightmenu', RightMenuController.delete);
 router.put('/rightmenu', RightMenuController.update);
 router.post('/rightmenu', upload.single('img'), RightMenuController.upload);
+
+router.get("/api/dproads", DpRoadController.get);
+router.post("/api/dproads",upload.single('img'), DpRoadController.create);
+router.patch("/api/dproads/:_id", DpRoadController.update);
+router.delete("/api/dproads/:_id", DpRoadController.delete);
+router.get("/api/dproads/:_id", DpRoadController.restore);
 
 export default router;
