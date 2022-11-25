@@ -1,0 +1,1 @@
+export {AlumniService} from './dpAlumni.js'
