@@ -2,6 +2,7 @@ import express from "express";
 import { DpConcernsController } from "../controllers/dpConcerns.js";
 import { AlumniController } from "../controllers/dpAlumni.js";
 import {authController} from "../controllers/authController.js";
+import { EngineerController } from "../controllers/engineer.js";
 import { middlewareController } from "../controllers/middlewareController.js";
 import {upload}  from '../middlewares/MulterMiddleWare.js'
 import {RightMenuController} from '../controllers/RightMenuController.js'
@@ -27,10 +28,18 @@ router.delete('/rightmenu', RightMenuController.delete);
 router.put('/rightmenu', RightMenuController.update);
 router.post('/rightmenu', upload.single('img'), RightMenuController.upload);
 
+<<<<<<< HEAD
+router.get("/api/engineer",middlewareController.verifyToken, EngineerController.get);
+router.post("/api/engineer",upload.single('img'), EngineerController.create);
+router.patch("/api/engineer/:_id",upload.single('img'), EngineerController.update);
+router.delete("/api/engineer/:_id", EngineerController.delete);
+router.get("/api/engineer/:_id", EngineerController.restore);
+=======
 router.get("/api/dproads", DpRoadController.get);
 router.post("/api/dproads",upload.single('img'), DpRoadController.create);
 router.patch("/api/dproads/:_id", DpRoadController.update);
 router.delete("/api/dproads/:_id", DpRoadController.delete);
 router.get("/api/dproads/:_id", DpRoadController.restore);
+>>>>>>> develop
 
 export default router;
