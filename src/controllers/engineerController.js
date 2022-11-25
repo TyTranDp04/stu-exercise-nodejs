@@ -43,21 +43,15 @@ export const EngineerController = {
     }
   },
 
-  delete(request, response) {
-    const id = request.params;
-    EngineerSchema.softDelete({ _id: id })
-      .then(() => response.status(200).json({
-        statusCode: 200,
-        message: "Delete data successfully",
-        data: null,
-        success: true
-      }))
-      .catch(() => response.status(404).json({
-        success: false,
-        message: `Can't find id: ${id._id}.`
-      }));
+  
+  delete(req, res, next) {
+    EngineerSchema.deleteOne({ _id: req.params.id })
+      .then(course => {
+        res.json(course)
+      })
+      .catch(next)
   },
-
+  
   restore(request, response) {
     const id = request.params;
     EngineerSchema.restore({ _id: id })

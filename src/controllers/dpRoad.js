@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Helper } from '../helper/index.js';
 import { DpRoadSchema } from '../schemas/dpRoad.js';
 import { DpRoadService } from '../services/dpRoad.js';
-
+import { that } from '../middlewares/Upload.model.js';
 export const DpRoadController = {
 
   get(req, res, next) {
@@ -12,7 +12,16 @@ export const DpRoadController = {
       })
       .catch(next)
   },
+  showItem(req, res, next) {
+    DpRoadSchema.findByIdAndUpdate({ _id: req.params.id })
+      .then(course => {
+        res.json(course)
+      })
+      .catch(next)
+  },
+  
   create(request, response) {
+    console.log(request)
     DpRoadService.create({
       _id: mongoose.Types.ObjectId(),
       number: request.body.number,
@@ -24,7 +33,6 @@ export const DpRoadController = {
         Helper.responseJsonHandler(null, error, response)
       })
   },
-
   update(request, response) {
     const id = request.params;
     const updateObj = request.body;

@@ -6,21 +6,15 @@ mongoose.Promise = global.Promise;
 const DropSchemaAlumni = new mongoose.Schema({
   content: {
     type: String,
-    require: true,
-
-
   },
   img: {
     type: String,
-    require: true,
   },
   name: {
     type: String,
-    require: true,
   },
-  desc: {
+  description: {
     type: String,
-    require: true,
   },
 },
   { timestamps: true });

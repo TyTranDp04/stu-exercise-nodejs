@@ -10,18 +10,17 @@ import { DpRoadController } from "../controllers/dpRoad.js";
 import { OurmainController } from "../controllers/dpOurmainController.js";
 
 const router = express.Router();
-router.get("/api/dpalumni", AlumniController.get);
-router.post("/api/dpalumni", upload.single('img'), AlumniController.create);
-router.get("/api/dpalumni/:id", AlumniController.showItem);
-router.patch("/api/dpalumni/:id", upload.single('img'), AlumniController.update);
-router.delete("/api/dpalumni/:_id", AlumniController.delete);
-router.get("/api/dpalumni/:_id", AlumniController.restore);
+router.get("/dpalumni", AlumniController.show);
+router.post("/dpalumni", upload.single('img'), AlumniController.upload);
+router.get("/dpalumni/:id", AlumniController.showItem);
+router.post("/dpalumni/:id", upload.single('img'), AlumniController.update);
+router.delete("/dpalumni/:id", AlumniController.delete);
 
-router.get("/api/dpconcerns", DpConcernsController.get);
-router.post("/api/dpconcerns", upload.single('img'), DpConcernsController.create);
-router.patch("/api/dpconcerns/:_id", DpConcernsController.update);
-router.delete("/api/dpconcerns/:_id", DpConcernsController.delete);
-router.get("/api/dpconcerns/:_id", DpConcernsController.restore);
+router.get("/dpconcerns", DpConcernsController.get);
+router.post("/dpconcerns", upload.single('img'), DpConcernsController.create);
+router.post("/dpconcerns/:id",upload.single('img'), DpConcernsController.update);
+router.delete("/dpconcerns/:id", DpConcernsController.delete);
+router.get("/dpconcerns/:id", DpConcernsController.showItem);
 
 router.post("/auth/register", authController.registerUser);
 router.post("/auth/login", authController.loginUser);
@@ -34,24 +33,24 @@ router.get('/rightmenu/:id', RightMenuController.showItem);
 router.post('/rightmenu/:id',upload.single('img'), RightMenuController.update);
 router.post('/rightmenu', upload.single('img'), RightMenuController.upload);
 
-router.get("/api/engineer",  EngineerController.get);
-router.post("/api/engineer", upload.single('img'), EngineerController.create);
-router.get('/api/engineer/:id', EngineerController.showItem);
-router.patch("/api/engineer/:id", upload.single('img'), EngineerController.update);
-router.delete("/api/engineer/:_id", EngineerController.delete);
-router.get("/api/engineer/:_id", EngineerController.restore);
+router.get("/engineer",  EngineerController.get);
+router.post("/engineer", upload.single('img'), EngineerController.create);
+router.get('/engineer/:id', EngineerController.showItem);
+router.post("/engineer/:id", upload.single('img'), EngineerController.update);
+router.delete("/engineer/:id", EngineerController.delete);
 
-router.get("/api/dproads", DpRoadController.get);
-router.post("/api/dproads", upload.single('img'), DpRoadController.create);
-router.patch("/api/dproads/:_id", DpRoadController.update);
-router.delete("/api/dproads/:_id", DpRoadController.delete);
-router.get("/api/dproads/:_id", DpRoadController.restore);
 
-router.get("/api/ourmain", OurmainController.get);
-router.post("/api/ourmain", upload.single('img'), OurmainController.create);
-router.get('/api/ourmain/:id', OurmainController.showItem);
-router.patch("/api/ourmain/:id", upload.single('img'), OurmainController.update);
-router.delete("/api/ourmain/:_id", OurmainController.delete);
-router.get("/api/ourmain/:_id", OurmainController.restore);
+router.get("/dproads", DpRoadController.get);
+router.get("/dproads/:id", DpRoadController.showItem);
+router.post("/dproads",upload.single('img'), DpRoadController.create);
+router.post("/dproads/:_id", upload.single('img'), DpRoadController.update);
+router.delete("/dproads/:_id", DpRoadController.delete);
+
+
+router.get("/ourmain", OurmainController.get);
+router.post("/ourmain", upload.single('img'), OurmainController.create);
+router.get('/ourmain/:id', OurmainController.showItem);
+router.post("/ourmain/:id", upload.single('img'), OurmainController.update); 
+router.delete("/ourmain/:_id", OurmainController.delete);
 
 export default router;
