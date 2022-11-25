@@ -4,16 +4,14 @@ import { DpConcernsSchema } from '../schemas/dpConcerns.js';
 import { DpConcernsService } from '../services/dpConcerns.js';
 
 export const DpConcernsController = {
-
-  get(request, response) {
-    DpConcernsService.get()
-      .then((data) => {
-        Helper.responseJsonHandler(data, null, response)
-      }).catch((error) => {
-        Helper.responseJsonHandler(null, error, response)
+  
+  get(req, res, next) {
+    DpConcernsSchema.find({})
+      .then(course => {
+        res.json(course)
       })
+      .catch(next)
   },
-
   create(request, response) {
     DpConcernsService.create({
       _id: mongoose.Types.ObjectId(),
