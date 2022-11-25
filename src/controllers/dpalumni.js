@@ -5,15 +5,26 @@ import { DpAlumniService } from '../services/dpalumni.js';
 
 export const DpAlumniController = {
 
-  get(request, response) {
-    DpAlumniService.get()
-      .then((data) => {
-        Helper.responseJsonHandler(data, null, response)
-      }).catch((error) => {
-        Helper.responseJsonHandler(null, error, response)
+  // get(req, res, next) {
+  //   // DpAlumniService.get()
+  //   //   .then((data) => {
+  //   //     Helper.responseJsonHandler(data, null, response)
+  //   //   }).catch((error) => {
+  //   //     Helper.responseJsonHandler(null, error, response)
+  //   //   })
+  //   DpAlumniSchema.find({})
+  //     .then(course => {
+  //       res.json(course)
+  //     })
+  //     .catch(next)
+  // },
+  get(req, res, next) {
+    DpAlumniSchema.find({})
+      .then(course => {
+        res.json(course)
       })
+      .catch(next)
   },
-
   create(request, response) {
     DpAlumniService.create({
       _id: mongoose.Types.ObjectId(),
