@@ -3,28 +3,26 @@ import { softDeletePlugin } from 'soft-delete-plugin-mongoose';
 
 mongoose.Promise = global.Promise;
 
-const AlumniSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  icon: {
+const DropSchemaAlumni = new mongoose.Schema({
+  content: {
     type: String,
-    required: true,
+    require: true,
+
+
   },
-  text: {
+  img: {
     type: String,
-    required: true,
-  },
-  avatar: {
-    type: String,
-    required: true,
+    require: true,
   },
   name: {
     type: String,
-    required: true,
+    require: true,
   },
   desc: {
     type: String,
-    required: true,
+    require: true,
   },
-});
-AlumniSchema.plugin(softDeletePlugin);
-export const DpAlumniSchema = mongoose.model('dp-alumnis', AlumniSchema);
+},
+  { timestamps: true });
+DropSchemaAlumni.plugin(softDeletePlugin);
+export const AlumniSchema = mongoose.model('dp-alumni', DropSchemaAlumni); 

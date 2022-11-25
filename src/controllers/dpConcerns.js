@@ -4,7 +4,7 @@ import { DpConcernsSchema } from '../schemas/dpConcerns.js';
 import { DpConcernsService } from '../services/dpConcerns.js';
 
 export const DpConcernsController = {
-  
+
   get(req, res, next) {
     DpConcernsSchema.find({})
       .then(course => {

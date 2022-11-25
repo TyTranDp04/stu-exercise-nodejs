@@ -1,10 +1,10 @@
-import {DpAlumniDatabase} from '../database/dpalumni.js'
+import { AlumniDatabase } from '../controllers/dbAlumni.js';
 
-export const DpAlumniService = {
+export const AlumniService = {
 
   get() {
     return new Promise((resolve, reject) => {
-      DpAlumniDatabase.get()
+      AlumniDatabase.get()
         .then((response) => {
           resolve({
             statusCode: 200,
@@ -22,7 +22,7 @@ export const DpAlumniService = {
   create(body) {
     let newPostObj = body;
     return new Promise((resolve, reject) => {
-      DpAlumniDatabase.create(newPostObj)
+      AlumniDatabase.create(newPostObj)
         .then((response) => {
           resolve({
             statusCode: 200,
@@ -47,7 +47,7 @@ export const DpAlumniService = {
       const _id = param._id;
       //  document id and obj is required
       if (_id && obj) {
-        DpAlumniDatabase.update(_id, obj)
+        AlumniDatabase.update(_id, obj)
           .then((response) => {
             resolve({
               statusCode: 200,
