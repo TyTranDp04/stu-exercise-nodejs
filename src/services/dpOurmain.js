@@ -1,4 +1,4 @@
-import { OurmainDatabase } from '../controllers/dbOurmain.js';
+import { OurmainDatabase } from '../database/dbOurmain.js';
 
 export const OurmainService = {
 

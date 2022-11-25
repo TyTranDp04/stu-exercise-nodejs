@@ -12,18 +12,35 @@ export const AlumniController = {
       })
       .catch(next)
   },
-
-  update(request, response) {
-    const id = request.params;
-    const updateObj = request.body;
-    AlumniService.update({ _id: id }, { $set: updateObj })
-      .then((data) => {
-        Helper.responseJsonHandler(data, null, response)
-      }).catch((error) => {
-        Helper.responseJsonHandler(null, error, response)
+  showItem(req, res, next) {
+    AlumniSchema.findByIdAndUpdate({ _id: req.params.id })
+      .then(course => {
+        res.json(course)
       })
+      .catch(next)
   },
-
+  update(req, res, next) {
+    const { file, body } = req
+    console.log(body, file)
+    if (file) {
+      that.uploadFileDriver({ shared: true }, file)
+        .then(result => {
+          const formData = {
+            ...body,
+            img: result.data.webContentLink
+          }
+          AlumniSchema.updateOne({ _id: req.params.id }, formData)
+            .then(() => res.redirect('/'))
+            .catch(err => {
+            });
+        })
+    } else {
+      AlumniSchema.updateOne({ _id: req.params.id }, body)
+        .then(() => res.redirect('/'))
+        .catch(err => {
+        });
+    }
+  },
   delete(request, response) {
     const id = request.params;
     AlumniSchema.softDelete({ _id: id })
