@@ -1,39 +1,46 @@
 import mongoose from 'mongoose';
 import { Helper } from '../helper/index.js';
-import { DpAlumniSchema } from '../schemas/dpalumni.js';
-import { DpAlumniService } from '../services/dpalumni.js';
+import { AlumniSchema } from '../schemas/dpAlumni.js';
+import { AlumniService } from '../services/dpAlumni.js';
+import {that} from '../middlewares/Upload.model.js'
 
-export const DpAlumniController = {
 
-  get(request, response) {
-    DpAlumniService.get()
-      .then((data) => {
-        Helper.responseJsonHandler(data, null, response)
-      }).catch((error) => {
-        Helper.responseJsonHandler(null, error, response)
+export const AlumniController = {
+
+  // get(request, response) {
+  //   EngineerService.get()
+  //     .then((data) => {
+  //       Helper.responseJsonHandler(data, null, response)
+  //     }).catch((error) => {
+  //       Helper.responseJsonHandler(null, error, response)
+  //     })
+  // },
+
+  get(req, res, next) {
+    AlumniSchema.find({})
+      .then(course => {
+        res.json(course)
       })
+      .catch(next)
   },
-
-  create(request, response) {
-    DpAlumniService.create({
-      _id: mongoose.Types.ObjectId(),
-      icon:request.body.icon,
-      text:request.body.text,
-      avatar:request.body.avatar,
-      name:request.body.name,
-      desc: request.body.desc,
-    })
-      .then((data) => {
-        Helper.responseJsonHandler(data, null, response)
-      }).catch((error) => {
-        Helper.responseJsonHandler(null, error, response)
-      })
-  },
+  // create(request, response) {
+  //   EngineerService.create({
+  //     _id: mongoose.Types.ObjectId(),
+  //     description: request.body.description,
+  //     img: request.body.img,
+  //     name: request.body.name,
+  //   })
+  //     .then((data) => {
+  //       Helper.responseJsonHandler(data, null, response)
+  //     }).catch((error) => {
+  //       Helper.responseJsonHandler(null, error, response)
+  //     })
+  // },
 
   update(request, response) {
     const id = request.params;
     const updateObj = request.body;
-    DpAlumniService.update({ _id: id }, { $set: updateObj })
+    AlumniService.update({ _id: id }, { $set: updateObj })
       .then((data) => {
         Helper.responseJsonHandler(data, null, response)
       }).catch((error) => {
@@ -43,7 +50,7 @@ export const DpAlumniController = {
 
   delete(request, response) {
     const id = request.params;
-    DpAlumniSchema.softDelete({ _id: id })
+    AlumniSchema.softDelete({ _id: id })
       .then(() => response.status(200).json({
         statusCode: 200,
         message: "Delete data successfully",
@@ -58,7 +65,7 @@ export const DpAlumniController = {
 
   restore(request, response) {
     const id = request.params;
-    DpAlumniSchema.restore({ _id: id })
+    AlumniSchema.restore({ _id: id })
       .then(() => response.status(200).json({
         statusCode: 200,
         message: "Restore data successfully",
@@ -68,6 +75,32 @@ export const DpAlumniController = {
         success: false,
         message: `Can't find id: ${id._id}.`
       }));
+  },
+  create(req, res) {
+    const { body, file } = req
+    console.log(body, file)
+    if(file){
+      that.uploadFileDriver({ shared: true }, file)
+      .then(result => {
+        const formData = {
+          ...body,
+          img: result.data.webContentLink
+        }
+        const courses = new AlumniSchema(formData)
+        courses.save()
+          .then(() => res.redirect('/'))
+          .catch(err => {
+          });
+      })
+    }else{
+      const courses = new AlumniSchema(body)
+      console.log(courses)
+      courses.save()
+        .then(() => res.redirect('/'))
+        .catch(err => {
+        });
+    }
+    
   }
 
 }

@@ -1,10 +1,10 @@
-import {AlumniDatabase} from '../controllers/dbAlumni.js';
+import { DpRoadSchema } from "../schemas/dpRoad.js";
 
-export const AlumniService = {
+export const DpRoadService = {
 
   get() {
     return new Promise((resolve, reject) => {
-        AlumniDatabase.get()
+      DpRoadSchema.find({})
         .then((response) => {
           resolve({
             statusCode: 200,
@@ -22,7 +22,7 @@ export const AlumniService = {
   create(body) {
     let newPostObj = body;
     return new Promise((resolve, reject) => {
-        AlumniDatabase.create(newPostObj)
+      DpRoadSchema.create(newPostObj)
         .then((response) => {
           resolve({
             statusCode: 200,
@@ -47,7 +47,7 @@ export const AlumniService = {
       const _id = param._id;
       //  document id and obj is required
       if (_id && obj) {
-        AlumniDatabase.update(_id, obj)
+        DpRoadSchema.findOneAndUpdate(_id, obj)
           .then((response) => {
             resolve({
               statusCode: 200,
@@ -61,6 +61,22 @@ export const AlumniService = {
           })
       }
     })
-  }
+  },
+
+  getDeleted() {
+    return new Promise((resolve, reject) => {
+      DpRoadSchema.findDeleted()
+        .then((response) => {
+          resolve({
+            statusCode: 200,
+            message: "Get list data deleted successfully",
+            data: response,
+            success: true,
+          });
+        }).catch((error) => {
+          reject(error);
+        })
+    })
+  },
 
 }

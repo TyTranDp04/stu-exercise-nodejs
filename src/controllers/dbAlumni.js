@@ -1,12 +1,12 @@
 import { errors } from '../helper/errors.js';
-import { DpAlumniSchema } from '../schemas/dpalumni.js';
+import { AlumniSchema } from '../schemas/dpAlumni.js';
 
-export const DpAlumniDatabase = {
+export const AlumniDatabase = {
 
   get() {
     return new Promise((resolve, reject) => {
       try {
-        DpAlumniSchema.find({}, (error, data) => {
+        AlumniSchema.find({}, (error, data) => {
           if (error) {
             errors["002"].reason = error.message || "";
             reject(errors["002"]);
@@ -24,7 +24,7 @@ export const DpAlumniDatabase = {
   create(postobject) {
     return new Promise((resolve, reject) => {
       try {
-        DpAlumniSchema.create(postobject, (error, resposne) => {
+        AlumniSchema.create(postobject, (error, resposne) => {
           if (error) {
             errors["001"].reason = error.message;
             reject(errors["001"]);
@@ -42,7 +42,7 @@ export const DpAlumniDatabase = {
   update(_id, obj) {
     return new Promise((resolve, reject) => {
       try {
-        DpAlumniSchema.findOneAndUpdate(_id, obj, { new: true }, (error, resposne) => {
+        AlumniSchema.findOneAndUpdate(_id, obj, { new: true }, (error, resposne) => {
           if (error) {
             errors["005"].reason = error.message;
             reject(errors["005"]);

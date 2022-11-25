@@ -1,18 +1,19 @@
 import express from "express";
 import { DpConcernsController } from "../controllers/dpConcerns.js";
-import { DpAlumniController } from "../controllers/dpalumni.js";
+import { AlumniController } from "../controllers/dpAlumni.js";
 import {authController} from "../controllers/authController.js";
 import { EngineerController } from "../controllers/engineer.js";
 import { middlewareController } from "../controllers/middlewareController.js";
 import {upload}  from '../middlewares/MulterMiddleWare.js'
 import {RightMenuController} from '../controllers/RightMenuController.js'
+import { DpRoadController } from "../controllers/dpRoad.js";
 
 const router = express.Router();
-router.get("/api/dpalumni", DpAlumniController.get);
-router.post("/api/dpalumni", DpAlumniController.create);
-router.patch("/api/dpalumni/:_id", DpAlumniController.update);
-router.delete("/api/dpalumni/:_id", DpAlumniController.delete);
-router.get("/api/dpalumni/:_id", DpAlumniController.restore);
+router.get("/api/dpalumni", AlumniController.get);
+router.post("/api/dpalumni",upload.single('img'), AlumniController.create);
+router.patch("/api/dpalumni/:_id", AlumniController.update);
+router.delete("/api/dpalumni/:_id", AlumniController.delete);
+router.get("/api/dpalumni/:_id", AlumniController.restore);
 
 router.get("/api/dpconcerns", DpConcernsController.get);
 router.post("/api/dpconcerns", DpConcernsController.create);
@@ -27,10 +28,18 @@ router.delete('/rightmenu', RightMenuController.delete);
 router.put('/rightmenu', RightMenuController.update);
 router.post('/rightmenu', upload.single('img'), RightMenuController.upload);
 
+<<<<<<< HEAD
 router.get("/api/engineer",middlewareController.verifyToken, EngineerController.get);
 router.post("/api/engineer",upload.single('img'), EngineerController.create);
 router.patch("/api/engineer/:_id",upload.single('img'), EngineerController.update);
 router.delete("/api/engineer/:_id", EngineerController.delete);
 router.get("/api/engineer/:_id", EngineerController.restore);
+=======
+router.get("/api/dproads", DpRoadController.get);
+router.post("/api/dproads",upload.single('img'), DpRoadController.create);
+router.patch("/api/dproads/:_id", DpRoadController.update);
+router.delete("/api/dproads/:_id", DpRoadController.delete);
+router.get("/api/dproads/:_id", DpRoadController.restore);
+>>>>>>> develop
 
 export default router;
