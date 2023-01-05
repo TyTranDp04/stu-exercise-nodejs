@@ -73,7 +73,7 @@ export const authController = {
         req.body.password,
         user.password
       );
-    if (validPassword == "") {
+      if (validPassword == "") {
         return res.status(402).json({
           statusCode: "402",
           message: "Password is empty. Password required",

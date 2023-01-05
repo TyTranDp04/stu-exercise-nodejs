@@ -1,10 +1,10 @@
-import {AlumniDatabase} from '../controllers/dbAlumni.js';
+import { AlumniDatabase } from '../database/dbAlumni.js';
 
 export const AlumniService = {
 
   get() {
     return new Promise((resolve, reject) => {
-        AlumniDatabase.get()
+      AlumniDatabase.get()
         .then((response) => {
           resolve({
             statusCode: 200,
@@ -22,7 +22,7 @@ export const AlumniService = {
   create(body) {
     let newPostObj = body;
     return new Promise((resolve, reject) => {
-        AlumniDatabase.create(newPostObj)
+      AlumniDatabase.create(newPostObj)
         .then((response) => {
           resolve({
             statusCode: 200,

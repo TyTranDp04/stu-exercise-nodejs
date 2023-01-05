@@ -1,10 +1,10 @@
-import { EngineerDatabase } from '../controllers/dbengineer.js';
+import { EngineerDatabase } from '../database/dbengineer.js';
 
 export const EngineerService = {
 
   get() {
     return new Promise((resolve, reject) => {
-        EngineerDatabase.get()
+      EngineerDatabase.get()
         .then((response) => {
           resolve({
             statusCode: 200,
@@ -22,7 +22,7 @@ export const EngineerService = {
   create(body) {
     let newPostObj = body;
     return new Promise((resolve, reject) => {
-        EngineerDatabase.create(newPostObj)
+      EngineerDatabase.create(newPostObj)
         .then((response) => {
           resolve({
             statusCode: 200,
